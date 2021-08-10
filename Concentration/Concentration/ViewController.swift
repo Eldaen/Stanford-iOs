@@ -10,11 +10,16 @@ import UIKit
 class ViewController: UIViewController {
 
     var touchesCount = 0 {
-        didSet {
+        didSet { // Если меняется значение, то обновляем на экране, property Observer
             touchesLabel.text = "Touches: \(touchesCount)"
         }
     }
     
+    let emojiCollection = ["🦊", "🐰", "🦊", "🐰"]
+    
+    /*
+     Функция, которая реализует сам переворот карточки.
+     */
     func flipButton(emoji: String, button: UIButton) {
         if button.currentTitle == emoji {
             button.setTitle("", for: .normal)
@@ -28,9 +33,11 @@ class ViewController: UIViewController {
     
     @IBOutlet var buttonCollection: [UIButton]!
     @IBOutlet weak var touchesLabel: UILabel!
-    @IBAction func buttonAction(_ sender: UIButton) {
+    @IBAction func buttonAction(_ sender: UIButton) { // функция нажатия на кнопку, кнопки в коллекции
         touchesCount += 1
-        flipButton(emoji: "🦊", button: sender)
+        if let buttonIndex = buttonCollection.firstIndex(of: sender) {
+            flipButton(emoji: emojiCollection[buttonIndex], button: sender)
+        }
     }
 }
 
