@@ -9,7 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var game = ConcentrationGame()
+    // lazy нужен чтобы св-во game инициализировалось только тогда, когда его кто-то вызовет. Иначе тут ошибка, хз пока почему точно.
+    lazy var game = ConcentrationGame(numberOfPairsOfCards: ( buttonCollection.count + 1 ) / 2) // +1 чтобы 0 не было никогда
 
     var touchesCount = 0 {
         didSet { // Если меняется значение, то обновляем на экране, property Observer
