@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var game = ConcentrationGame()
 
     var touchesCount = 0 {
         didSet { // Если меняется значение, то обновляем на экране, property Observer
@@ -36,7 +38,7 @@ class ViewController: UIViewController {
     @IBAction func buttonAction(_ sender: UIButton) { // функция нажатия на кнопку, кнопки в коллекции
         touchesCount += 1
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
-            flipButton(emoji: emojiCollection[buttonIndex], button: sender)
+            game.chooseCard(at: buttonIndex)
         }
     }
 }
