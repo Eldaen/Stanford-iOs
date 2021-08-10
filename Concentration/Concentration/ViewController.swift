@@ -18,20 +18,30 @@ class ViewController: UIViewController {
         }
     }
     
-    let emojiCollection = ["🦊", "🐰", "🦊", "🐰"]
+    let emojiCollection = ["🦊", "🐰", "🐝", "🦄", "🐭", "🐤", "🐵", "🐌", "🦞", "🐋", "🐓", "🕷"]
     
-    /*
-     Функция, которая реализует сам переворот карточки.
-     */
-    func flipButton(emoji: String, button: UIButton) {
-        if button.currentTitle == emoji {
-            button.setTitle("", for: .normal)
-            button.backgroundColor = #colorLiteral(red: 0, green: 0.6288433671, blue: 1, alpha: 1)
-        } else {
-            button.setTitle(emoji, for: .normal)
-            button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    var emojiDictionary = [Int:String]()
+    
+    func emojiIdentifier(for card: Card) -> String {
+        return emojiDictionary[card.identifier] ?? "?" // ?? Значит, кто если первое не nil, то возвращаем его.
+    }
+    
+    // Изменяет вид того что на экране после обработки в Модели
+    func updateViewFromModel() {
+        for index in buttonCollection.indices {
+            let button = buttonCollection[index]
+            let card = game.cards[index]
+            
+            if card.isFaceUp {
+                button.setTitle(emojiIdentifier(for: card), for: .normal)
+                button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                button.setTitle("", for: .normal)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1) // если карточки совпали, то ставим прозрачность на 0
+            }
         }
     }
+    
     
     
     @IBOutlet var buttonCollection: [UIButton]!
