@@ -22,15 +22,14 @@ class ConcentrationGame {
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
+            } else { // перевёрнём лицом вниз все карточки кроме той что нажали, раз уж не совпало
+                for id in cards.indices { //cards.indices это все доступные индексы массива
+                    cards[id].isFaceUp = false
+                }
+                cards[index].isFaceUp = true
+                indexOfOneAndOnlyFaceUpCard = index
             }
-        } else { // перевёрнём лицом вниз все карточки кроме той что нажали, раз уж не совпало
-            for id in cards.indices { //cards.indices это все доступные индексы массива
-                cards[id].isFaceUp = false
-            }
-            cards[index].isFaceUp = true
-            indexOfOneAndOnlyFaceUpCard = index
         }
-        
     }
     
     // Генерим массив карточек при инициализации, смотря сколько пар передали

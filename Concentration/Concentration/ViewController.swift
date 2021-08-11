@@ -54,6 +54,7 @@ class ViewController: UIViewController {
         touchesCount += 1
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
             game.chooseCard(at: buttonIndex)
+            updateViewFromModel()
         }
     }
 }
