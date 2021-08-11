@@ -38,6 +38,7 @@ class ConcentrationGame {
             let card = Card()
             cards += [card, card] // Добавляем в массив cards две одинаковые карточки, можно ещё через cards.append(card) 2 раза
         }
+        cards.shuffle()
     }
     
 }
