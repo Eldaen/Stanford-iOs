@@ -18,11 +18,15 @@ class ViewController: UIViewController {
         }
     }
     
-    let emojiCollection = ["🦊", "🐰", "🐝", "🦄", "🐭", "🐤", "🐵", "🐌", "🦞", "🐋", "🐓", "🕷"]
-    
+    var emojiCollection = ["🦊", "🐰", "🐝", "🦄", "🐭", "🐤", "🐵", "🐌", "🦞", "🐋", "🐓", "🕷"]
     var emojiDictionary = [Int:String]()
     
+    //Возвращает эмодзи для переданного идентификатора карты
     func emojiIdentifier(for card: Card) -> String {
+        if emojiDictionary[card.identifier] == nil {
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiCollection.count))) // Рандомное число по размеру коллекции через .count, двойная конвертация нужна из-за того что arc4random хочет UInt32
+            emojiDictionary[card.identifier] = emojiCollection.remove(at: randomIndex) // remove возвращает значение из массива по индексу и удаляет его, т.е. забираем эмодзи из массива
+        }
         return emojiDictionary[card.identifier] ?? "?" // ?? Значит, кто если первое не nil, то возвращаем его.
     }
     
