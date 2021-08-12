@@ -48,6 +48,7 @@ class ConcentrationGame {
     
     // Генерим массив карточек при инициализации, смотря сколько пар передали
     init(numberOfPairsOfCards: Int) {
+        assert(numberOfPairsOfCards > 0, "ConcentrationGame.init(\(numberOfPairsOfCards)): must have at least one pair of cards to init")
         for _ in 1...numberOfPairsOfCards {
             let card = Card()
             cards += [card, card] // Добавляем в массив cards две одинаковые карточки, можно ещё через cards.append(card) 2 раза
