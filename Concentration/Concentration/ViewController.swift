@@ -28,8 +28,7 @@ class ViewController: UIViewController {
     //Возвращает эмодзи для переданного идентификатора карты
     private func emojiIdentifier(for card: Card) -> String {
         if emojiDictionary[card.identifier] == nil {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiCollection.count))) // Рандомное число по размеру коллекции через .count, двойная конвертация нужна из-за того что arc4random хочет UInt32
-            emojiDictionary[card.identifier] = emojiCollection.remove(at: randomIndex) // remove возвращает значение из массива по индексу и удаляет его, т.е. забираем эмодзи из массива
+            emojiDictionary[card.identifier] = emojiCollection.remove(at: emojiCollection.count.arc4randomExtenstion) // remove возвращает значение из массива по индексу и удаляет его, т.е. забираем эмодзи из массива
         }
         return emojiDictionary[card.identifier] ?? "?" // ?? Значит, кто если первое не nil, то возвращаем его.
     }
@@ -59,6 +58,18 @@ class ViewController: UIViewController {
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
             game.chooseCard(at: buttonIndex)
             updateViewFromModel()
+        }
+    }
+}
+
+extension Int {
+    var arc4randomExtenstion: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self))) // Рандомное число по размеру коллекции через .count, двойная конвертация нужна из-за того
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self)))) // abs возвращает абсолютное значение, т.к. рандом по отрицательной величине не работает, а так будет.
+        } else {
+            return 0
         }
     }
 }
