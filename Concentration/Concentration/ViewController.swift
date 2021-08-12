@@ -10,23 +10,23 @@ import UIKit
 class ViewController: UIViewController {
     
     // lazy нужен чтобы св-во game инициализировалось только тогда, когда его кто-то вызовет. Иначе тут ошибка, хз пока почему точно.
-    lazy var game = ConcentrationGame(numberOfPairsOfCards: numberOfPairsOfCards)
+    private lazy var game = ConcentrationGame(numberOfPairsOfCards: numberOfPairsOfCards)
     
     var numberOfPairsOfCards: Int {
         return ( buttonCollection.count + 1 ) / 2 // +1 чтобы 0 не было никогда
     }
 
-    var touchesCount = 0 {
+    private(set) var touchesCount = 0 {
         didSet { // Если меняется значение, то обновляем на экране, property Observer
             touchesLabel.text = "Touches: \(touchesCount)"
         }
     }
     
-    var emojiCollection = ["🦊", "🐰", "🐝", "🦄", "🐭", "🐤", "🐵", "🐌", "🦞", "🐋", "🐓", "🕷"]
-    var emojiDictionary = [Int:String]()
+    private var emojiCollection = ["🦊", "🐰", "🐝", "🦄", "🐭", "🐤", "🐵", "🐌", "🦞", "🐋", "🐓", "🕷"]
+    private var emojiDictionary = [Int:String]()
     
     //Возвращает эмодзи для переданного идентификатора карты
-    func emojiIdentifier(for card: Card) -> String {
+    private func emojiIdentifier(for card: Card) -> String {
         if emojiDictionary[card.identifier] == nil {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiCollection.count))) // Рандомное число по размеру коллекции через .count, двойная конвертация нужна из-за того что arc4random хочет UInt32
             emojiDictionary[card.identifier] = emojiCollection.remove(at: randomIndex) // remove возвращает значение из массива по индексу и удаляет его, т.е. забираем эмодзи из массива
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     }
     
     // Изменяет вид того что на экране после обработки в Модели
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         for index in buttonCollection.indices {
             let button = buttonCollection[index]
             let card = game.cards[index]
@@ -52,9 +52,9 @@ class ViewController: UIViewController {
     
     
     
-    @IBOutlet var buttonCollection: [UIButton]!
-    @IBOutlet weak var touchesLabel: UILabel!
-    @IBAction func buttonAction(_ sender: UIButton) { // функция нажатия на кнопку, кнопки в коллекции
+    @IBOutlet private var buttonCollection: [UIButton]!
+    @IBOutlet private weak var touchesLabel: UILabel!
+    @IBAction private func buttonAction(_ sender: UIButton) { // функция нажатия на кнопку, кнопки в коллекции
         touchesCount += 1
         if let buttonIndex = buttonCollection.firstIndex(of: sender) {
             game.chooseCard(at: buttonIndex)

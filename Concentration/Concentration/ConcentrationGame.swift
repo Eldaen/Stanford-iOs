@@ -9,8 +9,8 @@ import Foundation
 
 class ConcentrationGame {
     
-    var cards = [Card]() // массив карт, сразу нужно вызвать ()
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private(set) var cards = [Card]() // массив карт, сразу нужно вызвать ()
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices { // проверяем карточки на перевёрнутость. Если больше одной перевёрнуто, тогда единственная перевёрнутая должна быть равна nil, т.е. не единственная
