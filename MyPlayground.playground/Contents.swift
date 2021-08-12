@@ -1,86 +1,55 @@
 import UIKit
 
-var greeting = "Hello, playground"
+// Enum Assosiated data, Ассоциированные данные
+
+//enum fastFoodMenu {
+//    case hamburger(numberOfPatties: Int)
+//    case fries(size: fryOrderSize)
+//    case drink(String, liter: Double)
+//    case cookie
+//}
+//
+//enum fryOrderSize {
+//    case small
+//    case large
+//}
+//
+//// Уcтанавливаем значение нашему ENUM-у
+//
+//var menuItem = fastFoodMenu.hamburger(numberOfPatties: 2)
+//var otherItem: fastFoodMenu = .cookie // если указать сразу тип данных, то можно так
+
+// Checking an enum's state
 
 
-// Выполнение с использованием функций
-
-struct Worker {
-    var name: String
-    var monthlySalary: Double
-    var weeksPerMonth: Int
-    var hoursPerDay: Double
+enum fastFoodMenu {
+    case hamburger(numberOfPatties: Int)
+    case fries(size: fryOrderSize)
+    case drink(String, liter: Double)
+    case cookie
 }
 
-var worker1 = Worker(name: "Bob", monthlySalary: 10_000, weeksPerMonth: 4, hoursPerDay: 8)
-
-func weeklySalary (monthlySalary: Double, weeksPerMonth: Int) -> Double {
-    return monthlySalary / Double(weeksPerMonth)
+enum fryOrderSize {
+    case small
+    case large
 }
 
-func hourlySalary (monthlySalary: Double, weeksPerMonth: Int, hoursPerDay: Double) -> Double {
-    return monthlySalary / Double(weeksPerMonth) / (hoursPerDay * 5)
+var menuItem = fastFoodMenu.hamburger(numberOfPatties: 2)
+
+//switch menuItem {
+//case .hamburger: break
+//case .fries:
+//    print("Fries")
+//    print("Great, awesome")
+//case .drink: print("Drink")
+//default: print("Something else")
+//}
+
+// вот так можно использовать ассациированные данные в енумах
+switch menuItem {
+case .hamburger(let pattyCount):        print("A burger with \(pattyCount) patties")
+case .fries(let size):                  print("A \(size) portion of fries")
+case .drink(let liter, let brand):      print("A \(liter)L of \(brand) Drink")
+default: print("Something else")
 }
 
-worker1.monthlySalary
-weeklySalary(monthlySalary: worker1.monthlySalary, weeksPerMonth: worker1.weeksPerMonth)
-hourlySalary(monthlySalary: worker1.monthlySalary, weeksPerMonth: worker1.weeksPerMonth, hoursPerDay: worker1.hoursPerDay)
-
-
-// Выполнение через computed properties
-
-struct Worker2 {
-    var name: String
-    var monthlySalary: Double
-    var weeksPerMonth: Int
-    var hoursPerDay: Double
-    
-    var weeklySalary: Double {
-        return monthlySalary / Double(weeksPerMonth)
-    }
-    var hourlySalary: Double {
-        return monthlySalary / Double(weeksPerMonth) / (hoursPerDay * 5)
-    }
-}
-
-var worker2 = Worker2(name: "Frank", monthlySalary: 20_000, weeksPerMonth: 4, hoursPerDay: 8)
-
-worker2.weeklySalary
-worker2.hourlySalary
-
-
-// Использование get и set
-
-struct Worker3 {
-    var name: String
-    var monthlySalary: Double
-    var weeksPerMonth: Int
-    var hoursPerDay: Double
-    
-    var weeklySalary: Double {
-        get {
-            return monthlySalary / Double(weeksPerMonth)
-        }
-        set {
-            monthlySalary = newValue * 4
-        }
-    }
-    var hourlySalary: Double {
-        get {
-            return monthlySalary / Double(weeksPerMonth) / (hoursPerDay * 5)
-        } set {
-            monthlySalary = newValue * hoursPerDay * Double(weeksPerMonth) * 5
-        }
-        
-    }
-}
-
-var worker3 = Worker3(name: "Bob3", monthlySalary: 10_000, weeksPerMonth: 4, hoursPerDay: 8)
-
-worker3.monthlySalary
-
-worker3.weeklySalary = 3000
-worker3.monthlySalary
-
-worker3.hourlySalary = 200
-worker3.monthlySalary
