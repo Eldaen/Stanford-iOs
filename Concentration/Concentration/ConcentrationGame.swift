@@ -10,7 +10,26 @@ import Foundation
 class ConcentrationGame {
     
     var cards = [Card]() // массив карт, сразу нужно вызвать ()
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices { // проверяем карточки на перевёрнутость. Если больше одной перевёрнуто, тогда единственная перевёрнутая должна быть равна nil, т.е. не единственная
+                if cards[index].isFaceUp {
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaceUp = ( index == newValue ) // вот так хитро записано, что в цикле перебирает все карты и true ставит только тому индексу, который равен newValue, т.е. indexOfOneAndOnlyFaceUpCard = index, где index и будет это newValue
+            }
+        }
+    }
     
     func chooseCard (at index: Int) {
         
@@ -21,12 +40,7 @@ class ConcentrationGame {
                     cards[index].isMatched = true
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
-            } else { // перевёрнём лицом вниз все карточки кроме той что нажали, раз уж не совпало
-                for id in cards.indices { //cards.indices это все доступные индексы массива
-                    cards[id].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
+            } else {
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
