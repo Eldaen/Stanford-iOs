@@ -56,24 +56,55 @@ import UIKit
 
 // Методы и переменные в ENUM-ах
 
-enum FastFoodMenu {
-    case hamburger(numberOfPatties: Int)
-    case fries(size: FryOrderSize)
-    case drink(String, liter: Double)
-    case cookie
-    
-    func isIncludedInSpecialOrder(number: Int) -> Bool {
-        switch self {
-        case .hamburger(let pattyCount): return pattyCount == number
-        case .cookie, .fries: return true
-        case .drink (_, let liter): return liter == 0.5
-        }
+//enum FastFoodMenu {
+//    case hamburger(numberOfPatties: Int)
+//    case fries(size: FryOrderSize)
+//    case drink(String, liter: Double)
+//    case cookie
+//
+//    func isIncludedInSpecialOrder(number: Int) -> Bool {
+//        switch self {
+//        case .hamburger(let pattyCount): return pattyCount == number
+//        case .cookie, .fries: return true
+//        case .drink (_, let liter): return liter == 0.5
+//        }
+//    }
+//}
+//
+//enum FryOrderSize {
+//    case small
+//    case large
+//}
+
+// Optionals
+
+var someNumber: Int? = 3
+
+//print(someNumber!)
+
+// if let
+
+//if let number = someNumber { // если someNumber = nil, тогда условие не выполнится
+//    print(number)
+//} else {
+//    print("There is no number")
+//}
+
+//// Nil coalescing operator
+//
+//print (someNumber ?? 123) // если someNumber = nil, тогда вызовет 123, а если нет, то someNumber
+//
+
+// guard
+
+func multiplyByTwo (number: Int?) {
+    guard let guardNumber = number else {
+        print("There is nil")
+        return
     }
+    print("\(guardNumber) x 2 is \(guardNumber * 2)")
 }
 
-enum FryOrderSize {
-    case small
-    case large
-}
+multiplyByTwo(number: someNumber)
 
 
