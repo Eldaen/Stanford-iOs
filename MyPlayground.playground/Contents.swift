@@ -97,14 +97,31 @@ var someNumber: Int? = 3
 
 // guard
 
-func multiplyByTwo (number: Int?) {
-    guard let guardNumber = number else {
-        print("There is nil")
-        return
-    }
-    print("\(guardNumber) x 2 is \(guardNumber * 2)")
+//func multiplyByTwo (number: Int?) {
+//    guard let guardNumber = number else {
+//        print("There is nil")
+//        return
+//    }
+//    print("\(guardNumber) x 2 is \(guardNumber * 2)")
+//}
+//
+//multiplyByTwo(number: someNumber)
+
+// Optional chaining
+
+struct iPhone {
+    var model: String
+    var memory: Int 
+    var color: String
 }
 
-multiplyByTwo(number: someNumber)
+var myIPhone: iPhone?
+myIPhone = iPhone(model: "12 Pro", memory: 256, color: "Gray")
+
+let deviceColor = myIPhone?.color // автоматически становится опциональным типом и возвращает nil
+
+if let phoneColor = deviceColor {
+    print("Phone color is \(phoneColor)")
+}
 
 
