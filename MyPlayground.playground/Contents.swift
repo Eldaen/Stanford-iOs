@@ -109,19 +109,43 @@ var someNumber: Int? = 3
 
 // Optional chaining
 
-struct iPhone {
-    var model: String
-    var memory: Int 
-    var color: String
+//struct iPhone {
+//    var model: String
+//    var memory: Int
+//    var color: String
+//}
+//
+//var myIPhone: iPhone?
+//myIPhone = iPhone(model: "12 Pro", memory: 256, color: "Gray")
+//
+//let deviceColor = myIPhone?.color // автоматически становится опциональным типом и возвращает nil
+//
+//if let phoneColor = deviceColor {
+//    print("Phone color is \(phoneColor)")
+//}
+
+
+// for in цикл stride
+
+//for i in 1...5 {
+//    print(i)
+//}
+//
+//print("----------")
+//
+//for i in 1..<5 {
+//    print(i)
+//}
+
+for i in stride(from: 1.5, to: 5, by: 0.5) // 5ка здесь не попадёт, получается полузамкнутый диапазон
+{
+    print(i)
 }
 
-var myIPhone: iPhone?
-myIPhone = iPhone(model: "12 Pro", memory: 256, color: "Gray")
+print("----------")
 
-let deviceColor = myIPhone?.color // автоматически становится опциональным типом и возвращает nil
-
-if let phoneColor = deviceColor {
-    print("Phone color is \(phoneColor)")
+for i in stride(from: 2, through: 10, by: 2)
+{
+    print(i)
 }
-
 
