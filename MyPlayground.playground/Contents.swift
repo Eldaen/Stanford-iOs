@@ -137,15 +137,32 @@ var someNumber: Int? = 3
 //    print(i)
 //}
 
-for i in stride(from: 1.5, to: 5, by: 0.5) // 5ка здесь не попадёт, получается полузамкнутый диапазон
-{
-    print(i)
-}
+//for i in stride(from: 1.5, to: 5, by: 0.5) // 5ка здесь не попадёт, получается полузамкнутый диапазон
+//{
+//    print(i)
+//}
+//
+//print("----------")
+//
+//for i in stride(from: 2, through: 10, by: 2)
+//{
+//    print(i)
+//}
+//
 
-print("----------")
 
-for i in stride(from: 2, through: 10, by: 2)
-{
-    print(i)
-}
+// Tuples - кортежи. Такой инструмент для группирования значений
 
+let money = ("$", 100)
+
+money.0
+money.1
+
+
+let money1 = (currency: "$", amount: 100)
+
+money1.amount
+money1.currency
+
+money1.0
+money1.1
